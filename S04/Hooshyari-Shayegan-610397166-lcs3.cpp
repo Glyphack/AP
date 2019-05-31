@@ -23,7 +23,7 @@ int LcsOfThree(string t_string1, string t_string2, string t_string3){
             for(int k=0;k<=string3_length;k++){
                 if (i==0 || j==0|| k==0)
                     lcs[i][j][k] = 0;
-                else if (t_string1[i-1] == t_string2[j-1] == t_string3[k-1])
+                else if (t_string1[i-1] == t_string2[j-1] && t_string1[i-1] == t_string3[k-1])
                     lcs[i][j][k] = lcs[i-1][j-1][k-1] + 1;
                 else
                     lcs[i][j][k] = max(max(lcs[i-1][j][k], lcs[i][j-1][k]),
