@@ -32,6 +32,7 @@ long long int calculate_value(long long int t_number, int digit){
 
 
 long long int add_with_sum_one_method(long long int t_number1, long long int t_number2, int step) {
+    cout<<"step is "<<step<<"numbers length are:"<<get_length(t_number1)<<" "<<get_length(t_number2)<<endl;
     if (step > get_length(t_number1))
         t_number1 = 0;
     if (step > get_length(t_number2))

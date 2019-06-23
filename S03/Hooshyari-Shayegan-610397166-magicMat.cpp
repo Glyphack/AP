@@ -7,12 +7,36 @@ void InitializeMatrix(int **matrix, int rows, int columns){
         matrix[row] = new int[columns];
 }
 
-void GenerateMagicMatrix(int** matrix, int** magic_matrix, int size){
+void GenerateMagicMatrix(int** magic_matrix, int size){
 
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            magic_matrix[i][j] = matrix[j][(i + j) % size];
+    int i = size/2;
+    int j = size-1;
+
+    for (int num=1; num <= size*size; )
+    {
+        if (i==-1 && j==size)
+        {
+            j = size-2;
+            i = 0;
         }
+        else
+        {
+            if (j == size)
+                j = 0;
+
+            if (i < 0)
+                i=size-1;
+        }
+        if (magic_matrix[i][j])
+        {
+            j -= 2;
+            i++;
+            continue;
+        }
+        else
+            magic_matrix[i][j] = num++;
+
+        j++; i--;
     }
 }
 
@@ -21,27 +45,16 @@ void PrintMatrix(int** matrix, int size){
         for (int j = 0; j < size; j++) {
             cout<<matrix[i][j]<<" ";
         }
-        cout<<"\n";
-    }
-}
-
-void FillMatrix(int **matrix, int size){
-    int c = 1;
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            matrix[i][j] = c;
-            c++;
-        }
+        if (i != size-1)
+            cout<<"\n";
     }
 }
 
 int main(){
     int size;
     cin>>size;
-    int **matrix(new int* [size]), **magic_matrix(new int* [size]);
+    int **magic_matrix(new int* [size]);
     InitializeMatrix(magic_matrix, size, size);
-    InitializeMatrix(matrix, size, size);
-    FillMatrix(matrix, size);
-    GenerateMagicMatrix(matrix, magic_matrix, size);
+    GenerateMagicMatrix(magic_matrix, size);
     PrintMatrix(magic_matrix, size);
 }
